@@ -19,15 +19,22 @@ namespace Day2P2
 
         public void RollbackPage()
         {
-            if (browsingPages.Count > 0)
+            //if (browsingPages.Count > 0)
+            //{
+            //    string page = browsingPages.Pop();
+            //    Console.WriteLine($"Page {page} removed sucessfully");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No pages found!");
+            //}
+
+            if (browsingPages.TryPop(out string result))
             {
-                string page = browsingPages.Pop();
-                Console.WriteLine($"Page {page} removed sucessfully");
+                Console.WriteLine(result);
             }
             else
-            {
-                Console.WriteLine("No pages found!");
-            }
+                Console.WriteLine("stack is empty");
         }
     }
 }
