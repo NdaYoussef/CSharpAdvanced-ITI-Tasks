@@ -50,10 +50,10 @@ namespace Day2P2
 
 
             #region Dictionary #2
-            //PhoneNumber number = new PhoneNumber();
-            //number.AddPhoneNo("nda", 1245533);
-            //int no = number.GetPhoneNo("nda");
-            //Console.WriteLine($"phone no is: {no}"); 
+            PhoneNumber number = new PhoneNumber();
+            number.AddPhoneNo("nda", 1245533);
+            int no = number.GetPhoneNo("nda");
+            Console.WriteLine($"phone no is: {no}");
             #endregion
 
 
