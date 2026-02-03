@@ -12,7 +12,17 @@ namespace Day2P1
             Animal animal = new Animal();
             animal.Age = 10;
             animal2.Arrive(animal);
-        //    Console.WriteLine($"animal age:{animal2.Arrive(animal)}");
+            Lion lion1 = new Lion("lion1");
+            Sparrow sparrow1 = new Sparrow("sparrow1");
+
+            Cage<Lion> lion = new Cage<Lion>();
+            Cage<Sparrow> sparrow = new Cage<Sparrow>();
+
+            lion.animals.Add(lion1);
+            sparrow.animals.Add(sparrow1);
+
+          
+       
             
         }
     }

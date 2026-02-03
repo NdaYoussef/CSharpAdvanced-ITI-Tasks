@@ -8,6 +8,11 @@ namespace Day2P1
 {
     internal class Lion :Animal
     {
+        public string Name { get; set; }
+        public Lion(string name)
+        {
+            Name = name;
+        }
         public void Roar()
         {
             Console.WriteLine("Lion roars");
