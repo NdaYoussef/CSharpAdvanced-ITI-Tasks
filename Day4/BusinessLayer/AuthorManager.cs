@@ -33,16 +33,16 @@ namespace BusinessLayer
          public Author ConvertDataRowToAuthor(DataRow dr)
             {
                 Author author = new Author();
-                author.Id =dr["au_id"].ToString()!;
-                author.Phone = dr["phone"].ToString();
-                author.FirstName = dr["au_fname"].ToString()!;
-                author.LastName = dr["au_lname"].ToString()!;
-                author.Address = dr["Address"].ToString()!;
-                author.State = dr["state"].ToString();
-                author.ZIP = dr["zip"].ToString();
-                author.City = dr["City"].ToString()!;
-                author.ActiveContract = dr.Field<bool>("ActiveContract");
-                return author;
+            author.Id = dr["au_id"].ToString()!;
+            author.FirstName = dr["au_fname"].ToString()!;
+            author.LastName = dr["au_lname"].ToString()!;
+            author.Address = dr["address"].ToString();
+            author.City = dr["city"].ToString();
+            author.State = dr["state"].ToString();
+            author.ZIP = dr["zip"].ToString();
+            author.Phone = dr["phone"].ToString();
+            author.ActiveContract = dr.Field<bool>("contract");
+            return author;
             }
 
         DbManager db = new DbManager();

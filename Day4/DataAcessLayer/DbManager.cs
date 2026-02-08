@@ -31,12 +31,11 @@ namespace DataAcessLayer
             {
                 sqlConnection.Open();
             }
-
+            sqlCommand.CommandType = CommandType.Text;
 
             int RowEffected = sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
             return RowEffected;
-
 
         }
 
@@ -56,10 +55,21 @@ namespace DataAcessLayer
 
         public int InsertAuthor(Author author)
         {
-            string sqlStatement = "insert into author (au_id,au_fname,au_lname,address,city,state,zip,phone,contract) values (@au_id,@au_fname,@au_lname,@address,@city,@zip,@contract,@phone)";
+            string sqlStatement = "insert into authors (au_id,au_fname,au_lname,address,city,state,zip,phone,contract) values (@au_id,@au_fname,@au_lname,@address,@city,@state,@zip,@phone,@contract)";
             if (sqlConnection.State != ConnectionState.Open)
                 sqlConnection.Open();
 
+            sqlCommand.CommandType= CommandType.Text;
+            sqlCommand.CommandText= sqlStatement;
+            sqlCommand.Parameters.AddWithValue("@au_id", author.Id);
+            sqlCommand.Parameters.AddWithValue("@au_fname", author.FirstName);
+            sqlCommand.Parameters.AddWithValue("@au_lname", author.LastName);
+            sqlCommand.Parameters.AddWithValue("@address", author.Address);
+            sqlCommand.Parameters.AddWithValue("@city", author.City);
+            sqlCommand.Parameters.AddWithValue("@state", author.State);
+            sqlCommand.Parameters.AddWithValue("@zip", author.ZIP);
+            sqlCommand.Parameters.AddWithValue("@phone", author.Phone);
+            sqlCommand.Parameters.AddWithValue("@contract", author.ActiveContract);
             int rows = sqlCommand.ExecuteNonQuery();
 
             sqlConnection.Close();
@@ -68,9 +78,9 @@ namespace DataAcessLayer
 
 
         }
-        public int DeleteAuthor(string auId)
+        public int DeleteAuthor(string au_id)
         {
-            int rowsAffected = ExecuteNonQuery($"delete from authors where id = {auId}");
+            int rowsAffected = ExecuteNonQuery($"delete from authors where au_id = '{au_id}'");
 
             return rowsAffected;
         }
@@ -87,13 +97,13 @@ namespace DataAcessLayer
                 Author author = new Author();
 
                 author.Id = dr["au_id"].ToString()!;
-                author.Phone = dr["phone"].ToString();
                 author.FirstName = dr["au_fname"].ToString()!;
                 author.LastName = dr["au_lname"].ToString()!;
                 author.Address = dr["address"].ToString();
+                author.City = dr["city"].ToString();
                 author.State = dr["state"].ToString();
                 author.ZIP = dr["zip"].ToString();
-                author.City = dr["city"].ToString();
+                author.Phone = dr["phone"].ToString();
                 author.ActiveContract = dr.Field<bool>("contract");
                 list.Add(author);
             }

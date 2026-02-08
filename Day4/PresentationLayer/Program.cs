@@ -47,11 +47,24 @@ namespace PresentationLayer
                         Console.Write("Last Name: ");
                         newAuthor.LastName = Console.ReadLine()!;
 
+                        Console.Write("Address: ");
+                        newAuthor.Address = Console.ReadLine();
+
                         Console.Write("City: ");
                         newAuthor.City = Console.ReadLine();
 
+                        Console.Write("State: ");
+                        newAuthor.State = Console.ReadLine();
+                        Console.Write("Zip: ");
+                        newAuthor.ZIP = Console.ReadLine();
+
                         Console.Write("Phone: ");
                         newAuthor.Phone = Console.ReadLine();
+
+                        Console.Write("Contract: ");
+                        newAuthor.ActiveContract = Convert.ToBoolean (Console.ReadLine());
+
+
 
                         manager.AddAuthor(newAuthor);
 
