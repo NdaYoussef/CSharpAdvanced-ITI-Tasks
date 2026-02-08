@@ -17,14 +17,42 @@ namespace Day3P1
         //}
         public List<Employee> Employees { get; set; }   = new List<Employee>();
 
-        //2- declare callback method 
-        public void BudgetNotification(Employee employee)
+
+        //public void BudgetNotification(Employee employee)
+        //{
+        //    Budget -= employee.Salary;
+        //   foreach (Employee emp in Employees)
+        //    {
+        //        Console.WriteLine($"Employee: {emp.Name} has an increased salary with value: {emp.Salary}, leads to decrease in company's budget with value: {Budget}");
+        //    }
+        //}
+
+        //2 subscriber declare callback method 
+        public void DecreaseBudget( float amount)
         {
-            Budget -= employee.Salary;
-           foreach (Employee emp in Employees)
+            this.Budget -= amount;
+        }
+
+
+        //3- subscribe 
+        public void Add(Employee employee)
+        {
+            Employees.Add(employee);
+
+            employee.SalaryChanged += this.DecreaseBudget;
+
+        }
+
+        public  List<Employee> FilterEmployee( Func<float, bool> filterDelEmployee)
+        {
+            List<Employee> list = new List<Employee>();
+
+            foreach (var emp in Employees)
             {
-                Console.WriteLine($"Employee: {emp.Name} has an increased salary with value: {emp.Salary}, leads to decrease in company's budget with value: {Budget}");
+                if (filterDelEmployee(emp.Salary))
+                    list.Add(emp);
             }
+            return list;
         }
     }
 }
