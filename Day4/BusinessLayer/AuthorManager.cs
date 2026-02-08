@@ -19,31 +19,31 @@ namespace BusinessLayer
         //    dbManager = new();
         //}
 
-      public List<Author> ConvertAuthorDataTableToList(DataTable dt)
-        {
-            List<Author> list = new List<Author>();
-
-            foreach (DataRow row in dt.Rows)
+          public List<Author> ConvertAuthorDataTableToList(DataTable dt)
             {
-                list.Add(ConvertDataRowToAuthor(row));
-            }
+                List<Author> list = new List<Author>();
 
-            return list;
-        }
-     public Author ConvertDataRowToAuthor(DataRow dr)
-        {
-            Author author = new Author();
-            author.Id =dr["au_id"].ToString()!;
-            author.Phone = dr["phone"].ToString();
-            author.FirstName = dr["au_fname"].ToString()!;
-            author.LastName = dr["au_lname"].ToString()!;
-            author.Address = dr["Address"].ToString()!;
-            author.State = dr["state"].ToString();
-            author.ZIP = dr["zip"].ToString();
-            author.City = dr["City"].ToString()!;
-            author.ActiveContract = dr.Field<bool>("ActiveContract");
-            return author;
-        }
+                foreach (DataRow row in dt.Rows)
+                {
+                    list.Add(ConvertDataRowToAuthor(row));
+                }
+
+                return list;
+            }
+         public Author ConvertDataRowToAuthor(DataRow dr)
+            {
+                Author author = new Author();
+                author.Id =dr["au_id"].ToString()!;
+                author.Phone = dr["phone"].ToString();
+                author.FirstName = dr["au_fname"].ToString()!;
+                author.LastName = dr["au_lname"].ToString()!;
+                author.Address = dr["Address"].ToString()!;
+                author.State = dr["state"].ToString();
+                author.ZIP = dr["zip"].ToString();
+                author.City = dr["City"].ToString()!;
+                author.ActiveContract = dr.Field<bool>("ActiveContract");
+                return author;
+            }
 
         DbManager db = new DbManager();
 
