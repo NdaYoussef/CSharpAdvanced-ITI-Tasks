@@ -43,7 +43,7 @@ namespace DataAcessLayer
         public DataTable GetAll() //get and fetch using select
         {
             string sqlQuery = "select * from authors";
-                sqlCommand.CommandText = sqlQuery;
+             sqlCommand.CommandText = sqlQuery;
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             DataTable table = new DataTable();
@@ -55,6 +55,7 @@ namespace DataAcessLayer
 
         public int InsertAuthor(Author author)
         {
+
             string sqlStatement = "insert into authors (au_id,au_fname,au_lname,address,city,state,zip,phone,contract) values (@au_id,@au_fname,@au_lname,@address,@city,@state,@zip,@phone,@contract)";
             if (sqlConnection.State != ConnectionState.Open)
                 sqlConnection.Open();

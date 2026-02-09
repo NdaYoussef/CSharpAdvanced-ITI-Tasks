@@ -69,7 +69,6 @@ namespace PresentationLayer
                         manager.AddAuthor(newAuthor);
 
                         Console.WriteLine(" Author Added Successfully");
-                        Console.ReadKey();
                         break;
 
                     case "3":
@@ -78,7 +77,7 @@ namespace PresentationLayer
 
                         manager.DeleteAuthor(id);
 
-                        Console.WriteLine("Deleted Successfully");
+                        Console.WriteLine($"Author with id: {id}Deleted Successfully");
                         Console.ReadKey();
                         break;
 
