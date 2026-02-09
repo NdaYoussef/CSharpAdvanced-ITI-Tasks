@@ -10,7 +10,10 @@ namespace Day5P2
     {
         public static string ToFriendlyDate(this DateTime date)
         {
-            var TargetedDay = DateTime.Now;
+          //  var TargetedDay = DateTime.Now;
+            var TargetedDay = DateTime.UtcNow;
+            Console.WriteLine($"today's date is: {TargetedDay}");
+
             if (date == TargetedDay)
                 return "Today";
 
@@ -20,7 +23,7 @@ namespace Day5P2
                 return "Yesterday";
 
             else 
-                return date.ToString("dd/mm/yy");
+                return date.ToString("mm/dd/yy");
         }
     }
 }
