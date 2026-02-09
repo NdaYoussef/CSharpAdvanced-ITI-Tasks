@@ -22,9 +22,9 @@
             Console.WriteLine($"Is Email valid, {validEmail}");
             Console.WriteLine($"Is Email valid, {validEmail2}");
             Console.WriteLine($"Is Email valid, {validEmail3}");
-            Console.WriteLine($"Is Email valid, {validEmail2}"); 
+            Console.WriteLine($"Is Email valid, {validEmail2}");
             #endregion
-
+            Console.WriteLine("===============================================================");
             #region #2 Extension
 
             IEnumerable<int> noList = new List<int> { 50, 30, 87, 254, 124, 789, 1000 };
@@ -33,10 +33,14 @@
             foreach (int i in averageList)
             {
                 Console.WriteLine($"all numbers have big average: {i}");
-            } 
+            }
             #endregion
+            Console.WriteLine("===============================================================");
 
-
+            #region #Extensions
+            var date = DateTime.UtcNow;
+            Console.WriteLine($"current test date is: {Test3.ToFriendlyDate(date)}"); 
+            #endregion
         }
     }
 }
