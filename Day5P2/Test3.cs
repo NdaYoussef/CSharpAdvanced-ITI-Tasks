@@ -11,19 +11,19 @@ namespace Day5P2
         public static string ToFriendlyDate(this DateTime date)
         {
           //  var TargetedDay = DateTime.Now;
-            var TargetedDay = DateTime.UtcNow;
-            Console.WriteLine($"today's date is: {TargetedDay}");
+            var TargetedDay = DateTime.Today;
+            //Console.WriteLine($"today's date is: {TargetedDay}");
 
             if (date == TargetedDay)
                 return "Today";
 
-            else if (date == TargetedDay.AddDays(1))
+            else if (date.Date == TargetedDay.AddDays(1))
                 return "Tomorrow";
-            else if (date == TargetedDay.AddDays(-1))
+            else if (date.Date == TargetedDay.AddDays(-1))
                 return "Yesterday";
 
             else 
-                return date.ToString("mm/dd/yy");
+                return date.ToString("dd/mm/yyyy");
         }
     }
 }

@@ -38,8 +38,9 @@
             Console.WriteLine("===============================================================");
 
             #region #Extensions
-            var date = DateTime.UtcNow;
-            Console.WriteLine($"current test date is: {Test3.ToFriendlyDate(date)}"); 
+            var date = new DateTime(2026, 02, 10);
+
+            Console.WriteLine($"current test date is: {date.ToFriendlyDate()}"); 
             #endregion
         }
     }

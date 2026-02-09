@@ -8,18 +8,20 @@ namespace Day5P2
 {
     public static class Test2
     {
-        public static IEnumerable<int> GetAboveAverage(this IEnumerable<int> numbers)
+        public static List<int> GetAboveAverage(this IEnumerable<int> numbers)
         {
-            //IEnumerable<int> result = numbers;
+            List<int> result = [];
 
             double avg = numbers.Average();
 
-           IEnumerable<int> aboveAgeList = numbers.Where(t => t > avg);
-            //foreach (int i in aboveAgeList)
-            //{
-            //    Console.WriteLine($"Average of all numbers: {i}");
-            //}
-            return aboveAgeList;
+           //List<int> aboveAgeList = numbers.Where(t => t > avg);
+            foreach (int i in numbers)
+            {
+                if(i>avg)
+                    result.Add(i);
+               // Console.WriteLine($"Average of all numbers: {i}");
+            }
+            return result;
         }
     }
 }
