@@ -209,6 +209,77 @@
                 Console.WriteLine($"Product Name: {product}");
             }
 
+            Console.WriteLine("18 ================================================================");
+            //-18
+            var ProductDetails = SampleData.Products.Select(p => new { ProductName = p.ProductName, Price = p.UnitPrice });
+            foreach (var product in ProductDetails)
+            {
+                Console.WriteLine($"Product Name: {product.ProductName}, Product Price: {product.Price}");
+            }
+
+            Console.WriteLine("19 ================================================================");
+            //-19 Bonus 1  
+            var orders = SampleData.Customers.Where(o=>o.City == "Seattle").SelectMany(o => o.Orders).Take(3);
+            foreach(var order in orders)
+            {
+                Console.WriteLine($"Order Name: {order.OrderId}");
+            }
+
+            Console.WriteLine("20 ================================================================");
+            //-20  Bonus 2
+            var productsStock = SampleData.Products.GroupBy(p => p.Category).Where(p=>p.Any(p=>p.UnitsInStock==0)).Select(g => new
+            {
+                Category = g.Key,
+                Products = g.Select(g => g.ProductName)
+            });
+
+            foreach(var product in productsStock)
+            {
+                Console.WriteLine($"Product Category: {product.Category}, Product Availabilty: {product.Products.Any()}");
+            }
+
+            Console.WriteLine("21 ================================================================");
+            //-21 Bonus 3
+            var EmpWithDept = SampleData.Employees.Join(SampleData.Departments,
+                                                                    emp => emp.DeptId,
+                                                                    dept => dept.DeptId,
+                                                                    (emp, dept) => new
+                                                                    {
+                                                                        emp.Salary,
+                                                                        emp.EmpName,
+                                                                        dept.DeptName
+                                                                    }).GroupBy(dept=>dept.DeptName)
+                                                                    .Select(e => new
+                                                                    {
+                                                                        DepartmentName = e.Key,
+                                                                        EmployeeCount = e.Count(), 
+                                                                        EmployeeAverageSalary = e.Average(e=>e.Salary)
+                                                                        
+                                                                    });
+
+            foreach (var emp in EmpWithDept)
+            {
+                Console.WriteLine($"Department Name: {emp.DepartmentName}, Total No of Employee: {emp.EmployeeCount}, Average Salary of Employee per Department: {emp.EmployeeAverageSalary}");
+            }
+
+            Console.WriteLine("22 ================================================================");
+            //-22 Bonus 4
+            var totalOrders = SampleData.Customers.SelectMany(o => o.Orders).Where(o => o.Total < 500);
+            foreach(var order in totalOrders)
+            {
+                Console.WriteLine($"total orders are less than 500: {order.OrderId}");
+            }
+
+            Console.WriteLine("23 ================================================================");
+            //- 23 Bonus 5
+            var AllOrders = SampleData.Customers.SelectMany(o => o.Orders).Where(o => o.OrderDate >= DateTime.Parse("1998,1,1"));
+            foreach(var order in AllOrders)
+            {
+                Console.WriteLine($"orders in 1998: {order.OrderId}");
+            }
+            
+
+
         }
     }
 }

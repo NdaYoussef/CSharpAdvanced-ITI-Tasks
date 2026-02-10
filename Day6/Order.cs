@@ -11,5 +11,10 @@ namespace Day6
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal Total { get; set; }
+
+        public override string ToString()
+        {
+            return $"Order Id: {OrderId}";
+        }
     }
 }
