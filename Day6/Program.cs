@@ -7,45 +7,45 @@
             //-1
             IEnumerable<Department> DeptList = SampleData.Departments.Select(d => new Department { DeptName = d.DeptName, Address = d.Address });
 
-            //List<Department> DeptList = SampleData.Departments.Select(d => new Department { DeptName = d.DeptName, Address = d.Address });
+            //var DeptList = SampleData.Departments.Select(d => new { DeptName = d.DeptName, Address = d.Address });
 
             foreach (Department dept in DeptList)
             {
                 Console.WriteLine($"Department Name: {dept.DeptName}, DepartmentAddress: {dept.Address}");
             }
-            Console.WriteLine("================================================================");
+            Console.WriteLine("2 ================================================================");
 
 
             //-2
-            IEnumerable<Product> products = SampleData.Products.Where(p => p.UnitsInStock == 0).ToList();
+            IEnumerable<Product> products = SampleData.Products.Where(p => p.UnitsInStock == 0);
 
             foreach (Product product in products)
                 Console.WriteLine($"All products that have no units in stock: {product.ProductName}");
-            Console.WriteLine("================================================================");
+            Console.WriteLine("3 ================================================================");
 
             //-3
 
-            IEnumerable<Product> productsList = SampleData.Products.Where(p => p.UnitsInStock == 0 && p.UnitPrice > 100).ToList();
+            IEnumerable<Product> productsList = SampleData.Products.Where(p => p.UnitsInStock == 0 && p.UnitPrice > 100);
 
             foreach (Product product in productsList)
                 Console.WriteLine($"All products that have no units in stock and unit price greater than 100: {product.ProductName}");
-            Console.WriteLine("================================================================");
+            Console.WriteLine("4 ================================================================");
 
             //-4
             var employees = SampleData.Employees.Count(e => e.Salary > 20000);
             Console.WriteLine($"Count of Employess: {employees}");
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("5 ================================================================");
 
             //5- 
-            List<Course> courses = SampleData.Courses.Where(e => e.Hours > 55).Take(3).ToList();
+            IEnumerable<Course> courses = SampleData.Courses.Where(e => e.Hours > 55).Take(3);
 
             foreach (Course course in courses)
             {
                 Console.WriteLine($"First 3 courses: {course.CourseName}");
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("6 ================================================================");
 
             //6-
             //IEnumerable<Subject> subjectList = from Subject in SampleData.Subjects
@@ -54,17 +54,21 @@
 
             //var subjects = SampleData.Subjects.Join(SampleData.Courses, sub => sub.SubjectId, crs => crs.SubjectId, (sub, crs) => new { CourseName = $"{crs.CourseName}"}).OrderBy(n=>n.)
 
-            Console.WriteLine("================================================================");
+            IEnumerable<Course> listCourses = SampleData.Courses.OrderBy(c=>c.SubjectId).ThenByDescending(c=>c.Hours).Select(c => new Course { CourseName = c.CourseName, Hours = c.Hours });
+
+
+
+            Console.WriteLine("7================================================================");
 
             //7-
-            IEnumerable<string> productsListByName = SampleData.Products.Select(n => n.ProductName).OrderBy(n=>n);
+            var productsListByName = SampleData.Products.OrderBy(n=>n.ProductName);
 
-            foreach (string productName in productsListByName)
+            foreach (var product  in productsListByName)
             {
-                Console.WriteLine($"Product Name: {productName}");
+                Console.WriteLine($"Product: {product}");
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("8 ================================================================");
 
             //-8
             var EmployeeDept = SampleData.Employees.Join(SampleData.Departments, emp => emp.DeptId, dept => dept.DeptId, (emp, dept) =>
@@ -75,7 +79,7 @@
                 Console.WriteLine($"Employee Name: {emp.EmployeeName}, Employee Department: {emp.DepartmentName}");
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("9 ================================================================");
 
             //-9
             var SubjectCrs = SampleData.Subjects.GroupJoin
@@ -94,7 +98,7 @@
                 }
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("10 ================================================================");
 
             //-10
             var coursesGrouping = SampleData.Courses.GroupBy(x => new
@@ -117,7 +121,7 @@
                 }
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("11 ================================================================");
 
             //-11
 
@@ -132,7 +136,7 @@
                 Console.WriteLine($"Product Category: {product.Category}, TotalUnits: {product.TotalUnits}");
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("12 ================================================================");
 
             //-12
 
@@ -140,28 +144,70 @@
             var productListMini = SampleData.Products.GroupBy(p => p.Category).Select(p => new
             {
                 Category = p.Key,
-                MinimumPrice = p.Min(p => p.UnitsInStock)
+                MinimumPrice = p.Min(p => p.UnitsInStock),
+                MinimProduct = p.MinBy(p => p.UnitsInStock)
             });
 
             foreach (var product in productListMini)
             {
-                Console.WriteLine($"Product Category: {product.Category}, MinimumPrice: {product.MinimumPrice}");
+                Console.WriteLine($"Product Category: {product.Category}, MinimumPrice: {product.MinimumPrice}, MinimumName: {product.MinimProduct.ProductName}");
             }
 
-            Console.WriteLine("================================================================");
+            Console.WriteLine("13 ================================================================");
 
             //-13
-        //    var customers = SampleData.Customers.Select(c=>c.CustomerName).Count(c=>c.Order)
+            var customers = SampleData.Customers.Select(p => new
+            {
+                CustomerName = p.CustomerName,
+                TotalCountOfOrders = p.Orders.Count,
+            });
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"Customer Name: {customer.CustomerName}, Total No Of orders: {customer.TotalCountOfOrders}");
+            }
 
 
+            Console.WriteLine("14 ================================================================");
+             //-14
+             var uniqueCategory = SampleData.Products.Select(p=>p.Category).Distinct();
+            foreach (var product in uniqueCategory)
+            {
+                Console.WriteLine($"Unique Category Name: {product}");
+            }
+
+            Console.WriteLine("15 ================================================================");
+            //-15
+            var ProductCategory = SampleData.Products.GroupBy(p => p.Category).Select(p => new
+            {
+                Category = p.Key,
+             //   ProductName = p.Select(p=>p.ProductName),
+                ProductMaximumPrice = p.MaxBy(p => p.UnitPrice),
+
+            });
+
+            foreach (var product in ProductCategory)
+            {
+                Console.WriteLine($"Product Category: {product.Category},ProductName: {product.ProductMaximumPrice.ProductName}, Maximum Price: {product.ProductMaximumPrice.UnitPrice} ");
+               
+            }
+
+            Console.WriteLine("16 ================================================================");
+            //-16
+
+           var firstProduct = SampleData.Products.FirstOrDefault(p => p.UnitsInStock == 0);
 
 
+            Console.WriteLine($"First product has no items in stock: {firstProduct.ProductName}");
 
 
-
-
-
-
+            Console.WriteLine("17 ================================================================");
+            //-17
+            IEnumerable<string> productNames = SampleData.Products.Select(p=> new string(p.ProductName)).Distinct();
+            foreach (var product in productNames)
+            {
+                Console.WriteLine($"Product Name: {product}");
+            }
 
         }
     }
