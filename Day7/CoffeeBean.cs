@@ -30,5 +30,8 @@ namespace Day7
         [ForeignKey("Supplier")]
         public int SupplierId 
             { get; set; }
+
+
+     
     }
 }

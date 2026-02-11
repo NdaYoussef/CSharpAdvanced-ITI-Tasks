@@ -20,11 +20,11 @@ namespace Day7
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(@"Data Source = NDA ; Initial Catalog = Test ; Integrated Security = true; Encrypt = true ; TrustServerCertificate = true;").EnableDetailedErrors(true);
+            optionsBuilder.UseSqlServer(@"Data Source = NDA ; Initial Catalog = ITICoffee ; Integrated Security = true; Encrypt = true ; TrustServerCertificate = true;").EnableDetailedErrors(true);
 
         }
 
-
+     
         // Configuration Types
         // 1- EF Conventions
         // 2- Data Annotation
