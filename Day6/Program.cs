@@ -203,7 +203,7 @@
 
             Console.WriteLine("17 ================================================================");
             //-17
-            IEnumerable<string> productNames = SampleData.Products.Select(p=> new string(p.ProductName)).Distinct();
+            IEnumerable<string> productNames = SampleData.Products.Select(p=> p.ProductName).Distinct();
             foreach (var product in productNames)
             {
                 Console.WriteLine($"Product Name: {product}");
@@ -232,6 +232,8 @@
                 Category = g.Key,
                 Products = g.Select(g => g.ProductName)
             });
+
+            var filterdProducts = SampleData.Products.Where(u => u.UnitsInStock == 0).GroupBy(c => c.Category);
 
             foreach(var product in productsStock)
             {
