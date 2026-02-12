@@ -87,24 +87,27 @@ namespace Day7
             Console.WriteLine(coffeeBeanData.Id);
             #endregion
             #region #2 update 
-            //var supplierUpdateName = dbContext.Suppliers.FirstOrDefault(d=>d.Id == 12);
-            //supplierUpdateName.Name = "updated supplier name";
+            var supplierUpdateName = dbContext.Suppliers.FirstOrDefault(d => d.Id == 12);
+            supplierUpdateName.Name = "updated supplier name";
             //dbContext.Suppliers.Update(supplierUpdateName);
 
-            //var coffeeUpdatedPrice = dbContext.Coffeebeans.FirstOrDefault(d=>d.Id == 4);
-            //coffeeUpdatedPrice.PricePerKeg = 300.00m;
-            //dbContext.Coffeebeans.Update(coffeeUpdatedPrice); 
+            var coffeeUpdatedPrice = dbContext.Coffeebeans.FirstOrDefault(d => d.Id == 4);
+            coffeeUpdatedPrice.PricePerKeg = 300.00m;
+            dbContext.Coffeebeans.Update(coffeeUpdatedPrice);
             #endregion
             #region Deleter
             //var deletedInfoCoffee = dbContext.Coffeebeans.FirstOrDefault(id => id.Id == 11);
             //dbContext.Coffeebeans.Remove(deletedInfoCoffee);
             //Console.WriteLine("data removed successfully");
             #endregion
-            var beans = dbContext.Coffeebeans.Where(p=>p.OriginCountry == "Colombia").Select(p => p.Name);
+
+            #region Filter
+            var beans = dbContext.Coffeebeans.Where(p => p.OriginCountry == "Colombia").Select(p => p.Name);
             foreach (var cBean in beans)
             {
                 Console.WriteLine(cBean);
-            }
+            } 
+            #endregion
             dbContext.SaveChanges();
 
         }

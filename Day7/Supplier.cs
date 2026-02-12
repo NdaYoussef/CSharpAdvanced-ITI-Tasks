@@ -16,5 +16,7 @@ namespace Day7
         [Phone]
         public int ContactNumber { get; set; }
         public string Email { get; set; }
+
+        public List<CoffeeBean> Coffees { get; set; }
     }
 }
