@@ -19,6 +19,8 @@ namespace Day8
         public SalesOffice SalesOffice { get; set; }
 
         public int SalesOfficeId { get; set; }
+        public List<PropertyOwner> PropertyOwners { get; set; }
+
 
     }
 }

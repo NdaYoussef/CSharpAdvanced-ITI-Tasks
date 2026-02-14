@@ -15,6 +15,8 @@ namespace Day8
 
         public int SalesOfficeId { get; set; }
 
+        public SalesOffice SalesOfficeManager { get; set; }
+
         public bool IsManager { get; set; } = false;
     }
 }

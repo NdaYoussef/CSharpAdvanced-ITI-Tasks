@@ -12,11 +12,13 @@ namespace Day8
 
         public string Location { get; set; }
 
-        public List<Employee> Employees { get; set; }
 
         public Employee Manager { get; set; }
 
-        public int ManagerId { get; set; }
+        public int? ManagerId { get; set; }
+        public List<Employee> Employees { get; set; }
+
+        public List<Property> Properties { get; set; }
 
     }
 }

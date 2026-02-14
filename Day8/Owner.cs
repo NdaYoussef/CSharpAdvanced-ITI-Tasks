@@ -10,5 +10,11 @@ namespace Day8
     {
         public int Id { get; set; } 
         public string Name { get; set; }
+        public List<PropertyOwner> PropertyOwners { get; set; }
+
+        public override string ToString()
+        {
+            return $"Owner Name: {Name}";
+        }
     }
 }
