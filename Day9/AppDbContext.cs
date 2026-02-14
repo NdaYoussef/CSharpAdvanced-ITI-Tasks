@@ -42,6 +42,11 @@ namespace Day9
                 .OnDelete(DeleteBehavior.Restrict);
             
             });
+
+            modelBuilder.Entity<StdViewModel>()
+                        .HasNoKey()
+                        .ToView("vw_StdWithCrs");
+
         }
     }
 }
