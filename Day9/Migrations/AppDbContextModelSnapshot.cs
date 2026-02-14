@@ -42,6 +42,24 @@ namespace Day9.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("Day9.StdViewModel", b =>
+                {
+                    b.Property<string>("CrsName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("GPA")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("vw_StdWithCrs", (string)null);
+                });
+
             modelBuilder.Entity("Day9.Student", b =>
                 {
                     b.Property<int>("Id")
