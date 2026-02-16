@@ -31,6 +31,7 @@ namespace Day9
                 Console.WriteLine($"Student Name: {student.Name}, Student GPA: {student.GPA} ");
             }
 
+            
             db.SaveChanges();
 
 
@@ -45,12 +46,19 @@ namespace Day9
             Console.WriteLine("4===============================================");
             //-4
 
-            var listStds = db.Students.FromSqlRaw($"exec sp_ALlStudents").ToList();
+            var listStds = db.Students.FromSqlRaw($"exec sp_ALlStudents");
+            listStds = listStds.OrderBy(n=>n.Name);
             foreach(var student in listStds)
             {
                 Console.WriteLine($"Std Name: {student.Name}, Student GPA: {student.GPA}");
             }
 
+            var listStds2 = db.Students.FromSqlInterpolated($"exec sp_ALlStudents");
+            listStds = listStds.OrderBy(n => n.Name);
+            foreach (var student in listStds)
+            {
+                Console.WriteLine($"Std Name: {student.Name}, Student Crs Name: {student.Course.Name}");
+            }
 
             //var StdsWithCrs = db.Students.FromSqlRaw($"select * from dbo.vw_StdWithCrs").ToList();
             //foreach (var student in listStds)
@@ -58,11 +66,15 @@ namespace Day9
             //    Console.WriteLine($"Std Name: {student.Name}, Student Course: {student.Course.Name}, Student GPA: {student.GPA}");
             //}
 
-            var data = db.Set<StdViewModel>().ToList();
+
+            var data = db.Set<StdViewModel>();
             foreach (var student in data)
             {
                 Console.WriteLine($"Std Name: {student.StudentName}, Course Name: {student.CrsName}, Student GPA: {student.StdGPA}");
             }
+
+          
+
         }
     }
 }
